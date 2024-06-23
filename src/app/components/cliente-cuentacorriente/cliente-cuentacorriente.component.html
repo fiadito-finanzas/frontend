@@ -1,0 +1,75 @@
+<div *ngIf="loading" class="text-center mt-3">
+  <p>Cargando datos...</p>
+</div>
+
+<div *ngIf="!loading && cuentaCorriente" class="card">
+  <div class="card-header">
+    <h4>Cuenta Corriente</h4>
+    <!-- Botón para abrir el modal de edición de cuenta corriente -->
+  <div class="mt-3">
+    <button mat-raised-button color="primary" (click)="abrirEditarCuentaCorriente()" *ngIf="!loading && cuentaCorriente">
+      Editar Cuenta Corriente
+    </button>
+    <button mat-raised-button color="warn" (click)="confirmarEliminacion()">
+      Eliminar Cuenta Corriente
+    </button>
+  </div>
+  </div>
+  <div class="card-body">
+    <p><strong>Tasa de Interés:</strong> {{ cuentaCorriente.tasaInteres }}</p>
+    <p><strong>Tasa de Moratoria:</strong> {{ cuentaCorriente.tasaMoratoria }}</p>
+    <p><strong>Saldo Crédito:</strong> {{ cuentaCorriente.saldoCredito }}</p>
+    <div *ngIf="cuentaCorriente">
+      <p><strong>Día de Pago Mensual:</strong> {{ cuentaCorriente.fechaPagoMensual | date: 'dd' }}</p>
+    </div>
+    <p><strong>Tipo de Interés:</strong> {{ cuentaCorriente.tipoInteres }}</p>
+    <p><strong>Periodo de Capitalización:</strong> {{ cuentaCorriente.periodoCapitalizacion }}</p>
+  </div>
+</div>
+
+<div *ngIf="!loading">
+  <div *ngIf="deudaMensual; else noDeuda" class="card mt-3">
+    <div class="card-header">
+      <h4>Deuda Mensual</h4>
+            <!-- Nuevo botón para ver todas las deudas mensuales -->
+            <button mat-raised-button color="accent" (click)="verTodasLasDeudasMensuales()">
+              Ver Todas las Deudas Mensuales
+            </button>
+    </div>
+    <div class="card-body">
+      <p><strong>Monto:</strong> {{ deudaMensual.monto }}</p>
+      <p><strong>Interés:</strong> {{ deudaMensual.interes }}</p>
+      <p><strong>Fecha Pago:</strong> {{ deudaMensual.fechaPago | date }}</p>
+      <p><strong>Pagada:</strong> {{ deudaMensual.pagada ? 'Sí' : 'No' }}</p>
+    </div>
+  </div>
+
+  <ng-template #noDeuda>
+    <div class="alert alert-info mt-3">
+      No Deuda Mensual
+    </div>
+  </ng-template>
+
+  <app-lista-transacciones [transacciones]="cuentaCorriente.transacciones" [cuentaCorriente]="cuentaCorriente"></app-lista-transacciones>
+</div>
+
+
+
+<!-- Modal de edición de cuenta corriente -->
+<app-editar-cuenta-corriente *ngIf="mostrarEditarCuentaCorriente"
+                              [cuentaCorriente]="cuentaCorriente"
+                              (cerrarModal)="mostrarEditarCuentaCorriente = false"
+                              (guardarCambios)="guardarCambiosCuentaCorriente($event)">
+</app-editar-cuenta-corriente>
+
+<!-- Modal de confirmación de eliminación -->
+<ng-template #confirmacionEliminarCliente>
+  <h2 mat-dialog-title>Confirmar Eliminación</h2>
+  <mat-dialog-content>
+    ¿Está seguro que desea eliminar la cuenta {{ cuentaCorriente.id }}?
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="cancelarEliminar()">Cancelar</button>
+    <button mat-button color="warn" (click)="eliminarCuentaCorriente()">Eliminar</button>
+  </mat-dialog-actions>
+</ng-template>

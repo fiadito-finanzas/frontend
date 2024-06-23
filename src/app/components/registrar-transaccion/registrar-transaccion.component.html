@@ -1,0 +1,102 @@
+<div class="overlay" (click)="cerrar()"></div>
+<div class="card-container">
+  <div class="card card-grande">
+    <div class="card-header">
+      <h4>Registrar Transacción</h4>
+      <button type="button" class="close" aria-label="Close" (click)="cerrar()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" class="form-control" [(ngModel)]="transaccion.tipo" (change)="tipoTransaccionChange()" required>
+          <option value="COMPRA">Compra</option>
+          <option value="COMPRA_A_CUOTAS">Compra a Cuotas</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="monto">Monto:</label>
+        <input type="number" id="monto" class="form-control" [(ngModel)]="transaccion.monto" name="monto" required readonly>
+        <div *ngIf="!montoValido && transaccion.monto > cuentaCorriente.saldoCredito" class="invalid-feedback">
+          El monto no puede ser mayor al saldo disponible en la cuenta corriente.
+        </div>
+      </div>
+
+      <div *ngIf="transaccion.tipo === 'COMPRA_A_CUOTAS'" class="form-group">
+        <label for="cuotas">Número de Cuotas:</label>
+        <input type="number" id="cuotas" class="form-control" [(ngModel)]="transaccion.cuotas" name="cuotas" required>
+        <button type="button" class="btn btn-secondary mt-2" (click)="calcularFechasPago()">Calcular Fechas de Pago</button>
+      </div>
+      <div *ngIf="transaccion.tipo === 'COMPRA_A_CUOTAS'" class="row mt-3">
+        <div class="col-md-6">
+          <label for="cantidadPlazoGraciaT">Cantidad Plazo de Gracia Total:</label>
+          <input type="number" id="cantidadPlazoGraciaT" class="form-control" [(ngModel)]="transaccion.cantidadPlazoGraciaT" name="cantidadPlazoGraciaT" (ngModelChange)="validarPlazosGracia()">
+        </div>
+        <div class="col-md-6">
+          <label for="cantidadPlazoGraciaP">Cantidad Plazo de Gracia Parcial:</label>
+          <input type="number" id="cantidadPlazoGraciaP" class="form-control" [(ngModel)]="transaccion.cantidadPlazoGraciaP" name="cantidadPlazoGraciaP" (ngModelChange)="validarPlazosGracia()">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="producto">Producto:</label>
+        <select id="producto" class="form-control" (change)="agregarProducto($event)">
+          <option value="">Selecciona un producto</option>
+          <option *ngFor="let producto of productos" [ngValue]="producto">{{ producto.nombre }}</option>
+        </select>
+      </div>
+      
+
+      <div *ngIf="transaccion.productos.length > 0" class="mt-3">
+        <h5>Productos Seleccionados</h5>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Subtotal</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of transaccion.productos">
+              <td>{{ producto.nombre }}</td>
+              <td>
+                <input type="number" [(ngModel)]="producto.cantidadSeleccionada" (ngModelChange)="actualizarCantidad(producto, $event)" min="1" class="form-control">
+              </td>
+              <td>{{ producto.precio | currency }}</td>
+              <td>{{ (producto.precio * producto.cantidadSeleccionada) | currency }}</td>
+              <td>
+                <button type="button" class="btn btn-danger btn-sm" (click)="eliminarProducto(producto)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer text-right">
+      <button type="button" class="btn btn-secondary mr-2" (click)="cerrar()">Cancelar</button>
+      <button type="button" class="btn btn-primary" [disabled]="!montoValido" (click)="registrarTransaccion()">Registrar Transacción</button>
+    </div>
+  </div>
+
+  <div class="tabla-fechas-pago" *ngIf="transaccion.tipo === 'COMPRA_A_CUOTAS' && fechasPago.length > 0">
+    <h5 class="mt-3">Fechas de Pago</h5>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Número de Cuota</th>
+          <th>Fecha de Pago</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fecha of fechasPago">
+          <td>{{ fecha.numeroCuota }}</td>
+          <td>{{ fecha.fechaPago | date: 'dd/MM/yyyy' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

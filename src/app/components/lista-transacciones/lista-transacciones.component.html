@@ -1,0 +1,45 @@
+<div *ngIf="loading" class="text-center mt-3">
+    <p>Cargando transacciones...</p>
+  </div>
+  
+  <div *ngIf="!loading && transacciones.length > 0" class="card mt-3">
+    <div class="card-header">
+      <h4>Lista de Transacciones</h4>
+      <button mat-raised-button color="accent" (click)="verTodasLasTransaccionesMensuales()">
+        Ver Todas Transacciones completas
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Monto</th>
+              <th>Tipo</th>
+              <th>Interés</th>
+              <th>Cuotas</th>
+              <th>Plazos de Gracia Total</th>
+              <th>Plazos de Gracia Parcial</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transaccion of transacciones">
+              <td>{{ transaccion.fecha | date }}</td>
+              <td>{{ transaccion.monto }}</td>
+              <td>{{ transaccion.tipo }}</td>
+              <td>{{ transaccion.interes }}</td>
+              <td *ngIf="transaccion.tipo === 'COMPRA_A_CUOTAS'">{{ transaccion.cuotas }}</td>
+              <td>{{ transaccion.cantidadPlazoGraciaT }}</td>
+              <td>{{ transaccion.cantidadPlazoGraciaP }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="!loading && transacciones.length === 0" class="alert alert-info mt-3">
+    No hay transacciones disponibles.
+  </div>
+  

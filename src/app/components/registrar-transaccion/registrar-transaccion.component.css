@@ -1,0 +1,36 @@
+/* registrar-transaccion.component.css */
+
+.card-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1050; /* Asegura que esté por encima del contenido normal */
+    width: 80%; /* Ajusta el ancho según sea necesario */
+    max-width: 600px; /* Ajusta el ancho máximo */
+    background-color: #ffffff; /* Color de fondo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente oscuro */
+    z-index: 1040; /* Coloca debajo del modal pero encima del contenido normal */
+  }
+  /* registrar-transaccion.component.css */
+
+.card-grande {
+    width: 500px; /* Ajusta el ancho del card según sea necesario */
+  }
+  
+  .tabla-fechas-pago {
+    margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+  }
+  
+  

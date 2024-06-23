@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h2>Lista de Transacciones</h2>
+  
+  <div class="filters">
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha Inicio</mat-label>
+      <input matInput [matDatepicker]="pickerInicio" [(ngModel)]="fechaInicio">
+      <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+      <mat-datepicker #pickerInicio></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha Fin</mat-label>
+      <input matInput [matDatepicker]="pickerFin" [(ngModel)]="fechaFin">
+      <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo de Transacción</mat-label>
+      <mat-select [(ngModel)]="tipoTransaccion">
+        <mat-option [value]="null">Todos</mat-option>
+        <mat-option value="COMPRA">Compra</mat-option>
+        <mat-option value="COMPRA_A_CUOTAS">Compra a Cuotas</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="button-group">
+      <button mat-raised-button color="primary" (click)="filtrarTransacciones()">Filtrar</button>
+      <button mat-raised-button color="warn" (click)="borrarFiltro()">Borrar Filtro</button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <div class="table-container">
+        <table mat-table [dataSource]="transaccionesFiltradas" class="mat-elevation-z8 mat-table">
+            <ng-container matColumnDef="fecha">
+              <th mat-header-cell *matHeaderCellDef> Fecha </th>
+              <td mat-cell *matCellDef="let element"> {{ formatearFecha(element.fecha) }} </td>
+            </ng-container>
+            <ng-container matColumnDef="monto">
+              <th mat-header-cell *matHeaderCellDef> Monto </th>
+              <td mat-cell *matCellDef="let element"> {{ element.monto }} </td>
+            </ng-container>
+            <ng-container matColumnDef="tipo">
+              <th mat-header-cell *matHeaderCellDef> Tipo </th>
+              <td mat-cell *matCellDef="let element"> {{ element.tipo }} </td>
+            </ng-container>
+            <ng-container matColumnDef="interes">
+              <th mat-header-cell *matHeaderCellDef> Interés </th>
+              <td mat-cell *matCellDef="let element"> {{ element.interes }} </td>
+            </ng-container>
+            <ng-container matColumnDef="cuotas">
+              <th mat-header-cell *matHeaderCellDef> Cuotas </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-button color="primary" *ngIf="element.tipo == 'COMPRA_A_CUOTAS'" (click)="verCuotas(element)">
+                  Ver Cuotas
+                </button>
+              </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+      
+  </div>
+</div>

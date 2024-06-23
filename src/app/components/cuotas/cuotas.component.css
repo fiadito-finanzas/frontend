@@ -1,0 +1,31 @@
+.mat-table {
+    width: 100%;
+    margin-top: 16px;
+    overflow: auto;
+  }
+  
+  .mat-header-cell, .mat-cell {
+    text-align: center;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .mat-header-cell {
+    background-color: #556B2F;
+    color: white;
+  }
+  
+  .mat-cell {
+    background-color: #F1F8E9;
+    color: #333;
+  }
+  
+  .mat-header-row, .mat-row {
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  
+  .mat-row:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  

@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h2>Deudas Mensuales</h2>
+
+  <div class="filters">
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha Inicio</mat-label>
+      <input matInput [matDatepicker]="pickerInicio" [(ngModel)]="fechaInicio">
+      <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+      <mat-datepicker #pickerInicio></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha Fin</mat-label>
+      <input matInput [matDatepicker]="pickerFin" [(ngModel)]="fechaFin">
+      <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Estado de Pago</mat-label>
+      <mat-select [(ngModel)]="pagada">
+        <mat-option [value]="null">Todos</mat-option>
+        <mat-option [value]="true">Pagada</mat-option>
+        <mat-option [value]="false">No Pagada</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="button-group">
+      <button mat-raised-button color="primary" (click)="filtrarDeudas()">Filtrar</button>
+      <button mat-raised-button color="warn" (click)="borrarFiltro()">Borrar Filtro</button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="deudasFiltradas" class="mat-elevation-z8 mat-table">
+      <ng-container matColumnDef="mes">
+        <th mat-header-cell *matHeaderCellDef> Mes </th>
+        <td mat-cell *matCellDef="let element"> {{ formatearMes(element.mes) }} </td>
+      </ng-container>
+      <ng-container matColumnDef="fechaInicioCiclo">
+        <th mat-header-cell *matHeaderCellDef> Inicio Ciclo </th>
+        <td mat-cell *matCellDef="let element"> {{ element.fechaInicioCiclo | date }} </td>
+      </ng-container>
+      <ng-container matColumnDef="fechaFinCiclo">
+        <th mat-header-cell *matHeaderCellDef> Fin Ciclo </th>
+        <td mat-cell *matCellDef="let element"> {{ element.fechaFinCiclo | date }} </td>
+      </ng-container>
+      <ng-container matColumnDef="fechaPago">
+        <th mat-header-cell *matHeaderCellDef> Fecha Pago </th>
+        <td mat-cell *matCellDef="let element"> {{ element.fechaPago | date }} </td>
+      </ng-container>
+      <ng-container matColumnDef="monto">
+        <th mat-header-cell *matHeaderCellDef> Monto </th>
+        <td mat-cell *matCellDef="let element"> {{ element.monto }} </td>
+      </ng-container>
+      <ng-container matColumnDef="interes">
+        <th mat-header-cell *matHeaderCellDef> Interés </th>
+        <td mat-cell *matCellDef="let element"> {{ element.interes }} </td>
+      </ng-container>
+      <ng-container matColumnDef="pagada">
+        <th mat-header-cell *matHeaderCellDef> Pagada </th>
+        <td mat-cell *matCellDef="let element"> {{ element.pagada ? 'Sí' : 'No' }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<h2>Cuotas de la Transacción</h2>
+
+<table mat-table [dataSource]="cuotas" class="mat-elevation-z8 mat-table">
+  <ng-container matColumnDef="numeroCuota">
+    <th mat-header-cell *matHeaderCellDef> Número de Cuota </th>
+    <td mat-cell *matCellDef="let cuota"> {{ cuota.numeroCuota }} </td>
+  </ng-container>
+  <ng-container matColumnDef="fechaVencimiento">
+    <th mat-header-cell *matHeaderCellDef> Fecha de Vencimiento </th>
+    <td mat-cell *matCellDef="let cuota"> {{ cuota.fechaVencimiento | date }} </td>
+  </ng-container>
+  <ng-container matColumnDef="saldoInicial">
+    <th mat-header-cell *matHeaderCellDef> Saldo Inicial </th>
+    <td mat-cell *matCellDef="let cuota"> {{ cuota.saldoInicial | currency:'USD':'symbol':'1.2-2' }} </td>
+  </ng-container>
+  <ng-container matColumnDef="montoCapital">
+    <th mat-header-cell *matHeaderCellDef> Monto Capital </th>
+    <td mat-cell *matCellDef="let cuota"> {{ cuota.montoCapital | currency:'USD':'symbol':'1.2-2' }} </td>
+  </ng-container>
+  <ng-container matColumnDef="montoInteres">
+    <th mat-header-cell *matHeaderCellDef> Monto Interés </th>
+    <td mat-cell *matCellDef="let cuota"> {{ cuota.montoInteres | currency:'USD':'symbol':'1.2-2' }} </td>
+  </ng-container>
+  <ng-container matColumnDef="montoAmortizacion">
+    <th mat-header-cell *matHeaderCellDef> Monto Amortización </th>
+    <td mat-cell *matCellDef="let cuota"> {{ cuota.montoAmortizacion | currency:'USD':'symbol':'1.2-2' }} </td>
+  </ng-container>
+  <ng-container matColumnDef="saldoFlujo">
+    <th mat-header-cell *matHeaderCellDef> Saldo Flujo </th>
+    <td mat-cell *matCellDef="let cuota"> {{ cuota.saldoFlujo | currency:'USD':'symbol':'1.2-2' }} </td>
+  </ng-container>
+  <ng-container matColumnDef="pagada">
+    <th mat-header-cell *matHeaderCellDef> Pagada </th>
+    <td mat-cell *matCellDef="let cuota"> {{ cuota.pagada ? 'Sí' : 'No' }} </td>
+  </ng-container>
+  <ng-container matColumnDef="periodoGracia">
+    <th mat-header-cell *matHeaderCellDef> Periodo de Gracia </th>
+    <td mat-cell *matCellDef="let cuota"> {{ cuota.periodoGracia }} </td>
+  </ng-container>
+  <ng-container matColumnDef="monto">
+    <th mat-header-cell *matHeaderCellDef> Monto </th>
+    <td mat-cell *matCellDef="let cuota"> {{ cuota.monto | currency:'USD':'symbol':'1.2-2' }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

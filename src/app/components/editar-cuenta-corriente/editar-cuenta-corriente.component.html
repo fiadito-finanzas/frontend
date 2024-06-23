@@ -1,0 +1,43 @@
+<div class="overlay"></div>
+<div class="card-grande">
+  <div class="card-header">
+    <h4>Formulario de Cuenta Corriente</h4>
+    <span class="close">&times;</span>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="cuentaCorrienteForm" (ngSubmit)="guardar()">
+      <div class="form-group">
+        <label for="tasaInteres">Tasa de Interés</label>
+        <input type="number" class="form-control" id="tasaInteres" formControlName="tasaInteres" required>
+      </div>
+      <div class="form-group">
+        <label for="tasaMoratoria">Tasa de Moratoria</label>
+        <input type="number" class="form-control" id="tasaMoratoria" formControlName="tasaMoratoria" required>
+      </div>
+      <div class="form-group">
+        <label for="saldoCredito">Saldo de Crédito</label>
+        <input type="number" class="form-control" id="saldoCredito" formControlName="saldoCredito" required>
+      </div>
+      <div class="form-group">
+        <label for="fechaPagoMensual">Fecha de Pago Mensual</label>
+        <input type="date" class="form-control" id="fechaPagoMensual" formControlName="fechaPagoMensual" required>
+      </div>
+      <div class="form-group">
+        <label for="tipoInteres">Tipo de Interés</label>
+        <select class="form-control" id="tipoInteres" formControlName="tipoInteres" required>
+          <option *ngFor="let tipo of tiposInteres" [value]="tipo">{{ tipo }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="periodoCapitalizacion">Periodo de Capitalización</label>
+        <select class="form-control" id="periodoCapitalizacion" formControlName="periodoCapitalizacion" required>
+          <option *ngFor="let periodo of periodosCapitalizacion" [value]="periodo.value">{{ periodo.label }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        <button type="button" class="btn btn-secondary" (click)="cerrar()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

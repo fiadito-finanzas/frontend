@@ -1,0 +1,112 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <div class="dashboard-title">
+    <h2>Detalle del Cliente</h2>
+  </div>
+
+  <div *ngIf="cliente">
+    <!-- Información del cliente -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <p><strong>Nombre:</strong> {{ cliente.nombre }}</p>
+            <p><strong>DNI:</strong> {{ cliente.dni }}</p>
+            <p><strong>Dirección:</strong> {{ cliente.direccion }}</p>
+            <p><strong>Email:</strong> {{ cliente.email }}</p>
+            <p><strong>Teléfono:</strong> {{ cliente.telefono }}</p>
+            <p><strong>Fecha de Registro:</strong> {{ cliente.fechaRegistro | date: 'dd/MM/yyyy' }}</p>
+            <p><strong>En Mora:</strong> {{ cliente.enMora ? 'Sí' : 'No' }}</p>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col" *ngIf="!cuentaCorriente">
+                <button mat-raised-button color="primary" class="w-100" (click)="crearCuentaCorriente(cliente.id)">
+                  Crear cuenta corriente
+                </button>
+              </div>
+              <div class="col">
+                <button mat-raised-button color="warn" class="w-100" (click)="mostrarEditarCliente = true">
+                  Editar Cliente
+                </button>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col">
+                <button mat-raised-button color="accent" class="w-100" (click)="confirmarEliminacion()">
+                  Eliminar Cliente
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Registrar Transacción -->
+        <div class="card">
+          <div class="card-body">
+            <button mat-raised-button color="primary" class="w-100" (click)="mostrarModalRegistrarTransaccion()">
+              Registrar Transacción
+            </button>
+          </div>
+          <!-- Componente RegistrarTransaccion como modal -->
+          <app-registrar-transaccion *ngIf="mostrarModal"
+                                     [cuentaCorriente]="cuentaCorriente"
+                                     (transaccionRegistrada)="registrarTransaccion($event)"
+                                     (cerrarModal)="cerrarModalRegistrarTransaccion()">
+          </app-registrar-transaccion>
+        </div>
+        <!-- Registrar Pago -->
+        <div class="card">
+          <div class="card-body">
+            <button mat-raised-button color="primary" class="w-100" (click)="mostrarModalRegistrarPago()">
+              Registrar Pago
+            </button>
+          </div>
+          <!-- Componente RegistrarPago como modal -->
+          <app-registrar-pago *ngIf="mostrarModalPago"
+                              (pagoRegistrado)="registrarPago($event)"
+                              (cerrarModal)="cerrarModalRegistrarPago()"
+                              [deudaMensual]="deudaMensual"
+                              [cuentaCorriente]="cuentaCorriente"
+                              [cuotas]="cuotas">
+          </app-registrar-pago>
+        </div>
+      </div>
+
+      <!-- Detalle de la cuenta corriente -->
+      <div class="col-md-6">
+        <app-cliente-cuentacorriente [clienteId]="cliente.id"></app-cliente-cuentacorriente>
+      </div>
+    </div>
+
+    <!-- Notificación -->
+    <div *ngIf="mostrarNotificacion" class="notificacion">
+      <mat-card>
+        <mat-card-content>
+          {{ notificacionMensaje }}
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="cerrarNotificacion()">Cerrar</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <!-- Dialogo de confirmación de eliminación -->
+    <ng-template #confirmacionEliminarCliente>
+      <h2 mat-dialog-title>Confirmar Eliminación</h2>
+      <mat-dialog-content>
+        ¿Está seguro que desea eliminar al cliente {{ cliente.nombre }}?
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button (click)="cancelarEliminar()">Cancelar</button>
+        <button mat-button color="warn" (click)="eliminarCliente()">Eliminar</button>
+      </mat-dialog-actions>
+    </ng-template>
+
+    <app-editar-cliente *ngIf="mostrarEditarCliente"
+                       [cliente]="cliente"
+                       (cerrarModal)="mostrarEditarCliente = false"
+                       (guardarCambios)="guardarCambiosCliente($event)">
+    </app-editar-cliente>
+  </div>
+</div>

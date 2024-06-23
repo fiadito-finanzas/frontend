@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h2>Crear Cliente</h2>
+  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+    <!-- Usuario -->
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" id="username" formControlName="username" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="userNombre">Nombre:</label>
+      <input type="text" id="userNombre" formControlName="userNombre" class="form-control" required>
+    </div>
+
+    <!-- Cliente -->
+    <div class="form-group">
+      <label for="clienteNombre">Nombre Cliente:</label>
+      <input type="text" id="clienteNombre" formControlName="clienteNombre" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="dni">DNI:</label>
+      <input type="text" id="dni" formControlName="dni" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="direccion">Dirección:</label>
+      <input type="text" id="direccion" formControlName="direccion" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="clienteEmail">Email Cliente:</label>
+      <input type="email" id="clienteEmail" formControlName="clienteEmail" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="telefono">Teléfono:</label>
+      <input type="text" id="telefono" formControlName="telefono" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="clienteForm.invalid">Crear Cliente</button>
+  </form>
+</div>

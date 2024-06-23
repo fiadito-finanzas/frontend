@@ -1,0 +1,63 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <div class="dashboard-title">
+    <h2>Dashboard</h2>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h3 class="text-center">Lista de Clientes</h3>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>DNI</th>
+              <th>Dirección</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Fecha de Registro</th>
+              <th>En Mora</th>
+              <th>Acciones</th> <!-- Columna para botón de acciones -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cliente of clientes; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ cliente.nombre }}</td>
+              <td>{{ cliente.dni }}</td>
+              <td>{{ cliente.direccion }}</td>
+              <td>{{ cliente.email }}</td>
+              <td>{{ cliente.telefono }}</td>
+              <td>{{ cliente.fechaRegistro | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ cliente.enMora ? 'Sí' : 'No' }}</td>
+              <td>
+                <button mat-icon-button color="primary" (click)="verCliente(cliente.id)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="options-buttons-bottom text-center mt-3">
+        <button mat-raised-button color="primary" routerLink="/crear-cliente">Crear Cliente</button>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="options-sidebar">
+        <h3 class="text-center">Opciones</h3>
+        <ul class="list-group">
+          <li class="list-group-item"><a routerLink="/productos">Productos</a></li>
+          <li class="list-group-item"><a href="/lista-transacciones">Transacciones</a></li>
+          <li class="list-group-item"><a href="#">Pagos</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

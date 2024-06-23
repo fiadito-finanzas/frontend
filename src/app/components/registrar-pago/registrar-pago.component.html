@@ -1,0 +1,62 @@
+<div class="overlay" (click)="cerrar()"></div>
+<div class="card card-grande">
+  <div class="card-header">
+    <h4>Registrar Pago</h4>
+    <button type="button" class="close" aria-label="Close" (click)="cerrar()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label for="tipoPago">Seleccionar tipo de pago:</label>
+      <select id="tipoPago" class="form-control" (change)="seleccionarTipoPago($event)">
+        <option value="completo">Pago Completo</option>
+        <option value="cuotas">Pago de Cuotas</option>
+      </select>
+    </div>
+
+    <div class="form-group" *ngIf="!pagoDTO.isCuota">
+      <!-- Campo de monto para pago completo -->
+      <label for="monto">Monto:</label>
+      <input type="number" id="monto" class="form-control" [(ngModel)]="pagoDTO.monto" name="monto" required>
+    </div>
+
+    <div *ngIf="pagoDTO.isCuota">
+      <div class="form-group">
+        <label for="monto">Monto:</label>
+        <input type="number" id="monto" class="form-control" [(ngModel)]="pagoDTO.monto" name="monto" required readonly>
+      </div>
+      <div class="form-group">
+        <label>Cuotas Disponibles:</label>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Cuota</th>
+              <th>Monto</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cuota of cuotasDisponibles">
+              <td>{{ cuota.monto === 0 ? 'Plazo de gracia' : cuota.id }}</td>
+              <td>{{ cuota.monto }}</td>
+              <td *ngIf="cuota.monto != 0">
+                <button *ngIf="cuota.monto !== 0" type="button" class="btn btn-primary btn-sm" (click)="seleccionarCuota(cuota)">Pagar</button>
+                <button *ngIf="cuota.monto === 0" type="button" class="btn btn-primary btn-sm" disabled>Pagar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="metodoPago">Método de Pago:</label>
+      <input type="text" id="metodoPago" class="form-control" [(ngModel)]="pagoDTO.metodoPago" name="metodoPago" required>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <button type="button" class="btn btn-secondary mr-2" (click)="cerrar()">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="registrarPago()">Registrar Pago</button>
+  </div>
+</div>

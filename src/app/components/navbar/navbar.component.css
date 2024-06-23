@@ -1,0 +1,39 @@
+.custom-toolbar {
+    height: 80px; /* Ajusta la altura del mat-toolbar */
+    font-size: 18px; /* Tamaño de la fuente para los botones */
+    padding: 0 24px; /* Espaciado interno horizontal */
+    background: linear-gradient(to right, #556B2F, #7CB342); /* Fondo degradado verde militar a verde claro */
+    color: white; /* Color del texto */
+  }
+  
+  .navbar-title {
+    font-size: 28px; /* Tamaño de la fuente del título */
+    font-weight: bold; /* Texto en negrita */
+    margin-left: 24px; /* Margen izquierdo para separar del borde */
+  }
+  
+  .navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 24px; /* Espaciado entre los enlaces */
+  }
+  
+  .spacer {
+    flex: 1; /* Espacio flexible para separar la marca de los enlaces */
+  }
+  
+  .mat-button {
+    color: white; /* Color del texto de los botones */
+    font-size: 16px; /* Tamaño de la fuente de los botones */
+  }
+  
+  .mat-button:hover,
+  .mat-button:focus {
+    background-color: rgba(255, 255, 255, 0.1); /* Color de fondo al pasar el mouse o enfocar */
+  }
+  
+  .active-link {
+    background-color: rgba(255, 255, 255, 0.1); /* Color de fondo cuando está activo */
+    border-bottom: 2px solid white; /* Borde inferior cuando está activo */
+  }
+  

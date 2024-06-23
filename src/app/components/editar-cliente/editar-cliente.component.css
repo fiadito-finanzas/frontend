@@ -1,0 +1,13 @@
+/* editar-cliente.component.css */
+.card-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; /* Ajusta el ancho según sea necesario */
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 1000; /* Asegura que esté por encima del resto del contenido */
+  }
+  

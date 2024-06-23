@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <h2 class="text-center">Lista de Productos</h2>
+  
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of productos; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.precio | currency }}</td>
+            <td>{{ producto.descripcion }}</td>
+            <td>
+              <button mat-icon-button color="primary" (click)="editarProducto(producto)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="eliminarProducto(producto.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="options-buttons-bottom text-center mt-3">
+      <button mat-raised-button color="primary" routerLink="/crear-producto">Crear Producto</button>
+    </div>
+  </div>
+  

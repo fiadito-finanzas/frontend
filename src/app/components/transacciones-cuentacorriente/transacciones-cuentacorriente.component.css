@@ -1,0 +1,38 @@
+.container {
+    background: #F5F5F5;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #556B2F;
+  }
+  
+  .filters {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    background: #E8F5E9;
+    padding: 16px;
+    border-radius: 8px;
+  }
+  
+  .mat-form-field {
+    width: 200px;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 16px;
+    margin-left: auto;
+  }
+  
+  .table-container {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+  }
+
+  

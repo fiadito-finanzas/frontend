@@ -1,0 +1,35 @@
+.container {
+    margin-top: 20px;
+  }
+  
+  .dashboard-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .options-buttons-bottom {
+    margin-top: 20px; /* Espacio superior para separar la lista de clientes del botón */
+    margin-bottom: 20px; /* Espacio inferior para separar el botón del borde inferior */
+  }
+  
+  .options-sidebar {
+    background-color: #f0f0f0; /* Color de fondo para el sidebar de opciones */
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .options-sidebar h3 {
+    margin-bottom: 10px;
+    color: #4b5320; /* Color verde militar para el título de opciones */
+  }
+  
+  .list-group-item {
+    cursor: pointer; /* Cambia el cursor al pasar sobre los enlaces de opciones */
+  }
+  
+  @media (max-width: 768px) {
+    .options-buttons-bottom {
+      text-align: center; /* Centra el botón en dispositivos móviles */
+    }
+  }
+  

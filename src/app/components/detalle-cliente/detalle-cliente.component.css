@@ -1,0 +1,42 @@
+.card {
+    margin-top: 20px; /* Espacio arriba del card */
+    border: 1px solid #e0e0e0; /* Borde del card */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+  }
+  
+  .card-body {
+    padding: 20px; /* Espacio interno del card */
+  }
+  
+  .text-center {
+    text-align: center; /* Centrar el contenido */
+    margin-top: 20px; /* Espacio arriba del botón */
+  }
+  
+  .notificacion {
+    position: fixed;
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1100; /* Asegura que esté por encima de otros elementos */
+  }
+
+  .mat-raised-button {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra similar al diseño de los otros botones */
+    border-radius: 4px; /* Bordes redondeados */
+  }
+  
+  .mat-raised-button:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3); /* Sombra cuando se pasa el mouse */
+  }
+  
+  .mat-raised-button:active {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Sombra al hacer clic */
+  }
+  
+  

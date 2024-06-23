@@ -1,0 +1,41 @@
+<!-- editar-cliente.component.html -->
+<div class="card-container">
+    <div class="card">
+      <div class="card-header">
+        <h4>Editar Cliente</h4>
+        <button type="button" class="close" aria-label="Close" (click)="cerrar()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card-body">
+        <!-- Formulario para editar datos del cliente -->
+        <form>
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" [(ngModel)]="cliente.nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="dni">DNI:</label>
+            <input type="text" id="dni" name="dni" class="form-control" [(ngModel)]="cliente.dni" required>
+          </div>
+          <div class="form-group">
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" class="form-control" [(ngModel)]="cliente.direccion">
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" [(ngModel)]="cliente.email">
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" name="telefono" class="form-control" [(ngModel)]="cliente.telefono">
+          </div>
+        </form>
+      </div>
+      <div class="card-footer text-right">
+        <button type="button" class="btn btn-secondary mr-2" (click)="cerrar()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="guardar()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+  
