@@ -12,6 +12,7 @@ import { ListaProductosComponent } from './components/lista-productos/lista-prod
 import { CrearProductoComponent } from './components/crear-producto/crear-producto.component';
 import { ListaTransaccionesComponent } from './components/lista-transacciones/lista-transacciones.component';
 import { TransaccionesEstablecimientoComponent } from './components/transacciones-establecimiento/transacciones-establecimiento.component';
+import { AuthGuard } from './services/authguard';
 
 const routes: Routes = [
   {
